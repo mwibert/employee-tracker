@@ -3,7 +3,6 @@ import inquirer from "inquirer";
 
 const getAllEmployees = async (): Promise<void> => {
   const employees = await Employee.findAll({ include: [Role] });
-  // console.log(employees);
   console.table(
     employees.map((emp) => ({
       ID: emp.id,
@@ -50,6 +49,13 @@ const addEmployee = async (): Promise<void> => {
     },
   ]);
 
+  // Validate that the entered role exists to prevent foreign key errors
+  const roleExists = await Role.findByPk(parseInt(role_id));
+  if (!roleExists) {
+    console.log(`Role with ID ${role_id} does not exist. Cannot add employee.`);
+    return;
+  }
+
   await Employee.create({
     first_name,
     last_name,
@@ -67,7 +73,7 @@ const updateEmployeeManager = async (): Promise<void> => {
   ]);
 
   await Employee.update(
-    { manager_id },
+    { manager_id: manager_id ? parseInt(manager_id) : null },
     { where: { id: parseInt(employee_id) } }
   );
 
