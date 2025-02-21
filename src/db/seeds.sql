@@ -9,6 +9,6 @@ INSERT INTO roles (title, salary, department_id) VALUES
 ('Accountant', 70000, 3);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES 
-('John', 'Doe', 1, NULL),
-('Jane', 'Smith', 2, NULL),
-('Mike', 'Johnson', 3, 1);
+('Wills', 'Williams', 1, NULL),
+('Marc', 'Weeks', 2, NULL),
+('Hamzah', 'Alsalmi', 3, 1);
